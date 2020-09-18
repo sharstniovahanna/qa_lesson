@@ -17,8 +17,6 @@ public class Runner {
         SearchPage searchPage = new SearchPage(driver);
         searchPage.goToMail();
 
-        searchPage.switchPage();
-
         LoginPage loginPage = new LoginPage(driver);
         loginPage.loginWithCreds("sharstniovaH", "123456!");
 

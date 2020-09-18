@@ -18,19 +18,15 @@ public class SearchPage {
 
     public void goToMail() {
         getEnterEmailButton().click();
+        Set<String> handle2 = driver.getWindowHandles();
+        Object[] array = handle2.toArray();
+        driver.switchTo().window((String) array[1]);
+
+
     }
 
     private WebElement getEnterEmailButton() {
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".desk-notif-card__card > a.button")));
         return driver.findElement(ENTER_EMAIL_BUTTON_LOCATOR);
     }
-
-    public void switchPage(){
-        Set<String> handle2 = driver.getWindowHandles();
-        Object[] array = handle2.toArray();
-        driver.switchTo().window((String) array[1]);
-
-    }
-
-
 }
