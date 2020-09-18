@@ -3,7 +3,6 @@ package ru.yandex;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,7 +14,6 @@ public class LoginPage {
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
-
     }
 
     public WebElement getLoginField() {
@@ -29,8 +27,16 @@ public class LoginPage {
     }
 
     public WebElement getPasswordField() {
-        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.name("passwd")));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.name("passwd")));
         return driver.findElement(PASSWORD_FIELD_LOCATOR);
+    }
+
+    public void loginWithCreds(String username,String password){
+        getLoginField().sendKeys(username);
+        getSubmitButton().click();
+        getPasswordField().sendKeys(password);
+        getSubmitButton().click();
+
     }
 
 }
