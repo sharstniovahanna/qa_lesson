@@ -17,10 +17,12 @@ public class SearchPage {
     }
 
     public void goToMail() {
+        Set<String> handle1 = driver.getWindowHandles();
         getEnterEmailButton().click();
         Set<String> handle2 = driver.getWindowHandles();
+        handle2.removeAll(handle1);
         Object[] array = handle2.toArray();
-        driver.switchTo().window((String) array[1]);
+        driver.switchTo().window((String) array[0]);
 
 
     }

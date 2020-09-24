@@ -17,7 +17,7 @@ public class LoginPage {
     }
 
     public WebElement getLoginField() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.name("login")));
+        new WebDriverWait(driver, 20).until(ExpectedConditions.presenceOfElementLocated(By.name("login")));
         return driver.findElement(LOGIN_FIELD_LOCATOR);
     }
 
