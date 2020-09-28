@@ -23,12 +23,11 @@ public class SearchPage {
         handle2.removeAll(handle1);
         Object[] array = handle2.toArray();
         driver.switchTo().window((String) array[0]);
-
-
     }
 
     private WebElement getEnterEmailButton() {
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".desk-notif-card__card > a.button")));
         return driver.findElement(ENTER_EMAIL_BUTTON_LOCATOR);
     }
+
 }
