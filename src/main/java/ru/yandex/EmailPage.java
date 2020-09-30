@@ -14,6 +14,8 @@ public class EmailPage {
     public final By ATTACHFILE_LOCATOR = By.cssSelector(".ComposeAttachFileButton-FileInput");
     public final By SEND_LOCATOR_BUTTON = By.cssSelector(".ComposeControlPanelButton-Button.ComposeControlPanelButton-Button_action");
     public final By SAVE_TO_DISK_LOCATOR_BUTTON = By.xpath("//a[@title='Сохранить на Диск «random.txt» (20 байт)']");
+    public final By BACK_TO_INCOME_MESSG_LINK = By.cssSelector(".ComposeDoneScreen-Link");
+    public final By REFRESH_BUTTON_LOCATOR =By.cssSelector(".svgicon-mail--ComposeButton-Refresh");
     private WebDriver driver;
 
     public EmailPage(WebDriver driver) {
@@ -44,7 +46,15 @@ public class EmailPage {
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(SEND_LOCATOR_BUTTON));
         return driver.findElement(SEND_LOCATOR_BUTTON);
     }
+    public WebElement getBackToIncomeMsg() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(BACK_TO_INCOME_MESSG_LINK));
+        return driver.findElement(BACK_TO_INCOME_MESSG_LINK);
+    }
 
+    public WebElement getRefreshButton(){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(REFRESH_BUTTON_LOCATOR));
+        return driver.findElement(REFRESH_BUTTON_LOCATOR);
+    }
     public void openMail() {
         getWriteButton().click();
     }
@@ -56,17 +66,29 @@ public class EmailPage {
     public void attachFile(){
         FileCreator.create("random.txt");
         getAttachFileInput().sendKeys("/Users/hsharstniova/IdeaProjects/qa_lesson/random.txt");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getSendButton().click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getBackToIncomeMsg().click();
     }
-
     public WebElement getSaveToDiskButton(){
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(SAVE_TO_DISK_LOCATOR_BUTTON));
         return driver.findElement(SAVE_TO_DISK_LOCATOR_BUTTON);
     }
 
+    public void refreshPage(){
+        getRefreshButton().click();
+    }
     public void saveToDisk(){
         getSaveToDiskButton().click();
-
     }
 
     public boolean isOpened() {
@@ -78,5 +100,4 @@ public class EmailPage {
         }
         return result;
     }
-
 }

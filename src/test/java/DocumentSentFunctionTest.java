@@ -46,6 +46,9 @@ public class DocumentSentFunctionTest {
                 PropertiesManager.getProperty("correct_recipient")
         );
         emailPage.attachFile();
+        emailPage.refreshPage();
+        emailPage.saveToDisk();
+
 
 
 
