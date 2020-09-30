@@ -1,3 +1,4 @@
+import Uttils.PropertiesManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,7 +27,7 @@ public class DocumentSentFunctionTest {
         driver = new ChromeDriver();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        driver.get("https://yandex.by/");
+        driver.get(PropertiesManager.getProperty("base_url"));
     }
 
     @Test
@@ -34,12 +35,18 @@ public class DocumentSentFunctionTest {
         SearchPage searchPage = new SearchPage(driver);
         searchPage.goToMail();
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginWithCreds("sharstniovaH", "123456!");
+        loginPage.loginWithCreds(
+                PropertiesManager.getProperty("correct_username"),
+                PropertiesManager.getProperty("correct_password")
+        );
         EmailPage emailPage = new EmailPage(driver);
         Assert.assertTrue(emailPage.isOpened());
         emailPage.openMail();
-        emailPage.setRecipient("sharstniovaH@yandex.by");
+        emailPage.setRecipient(
+                PropertiesManager.getProperty("correct_recipient")
+        );
         emailPage.attachFile();
+
 
 
 
