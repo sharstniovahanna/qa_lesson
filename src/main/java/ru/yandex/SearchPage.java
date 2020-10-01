@@ -17,6 +17,7 @@ public class SearchPage {
     }
 
     public void goToMail() {
+
         Set<String> handle1 = driver.getWindowHandles();
         getEnterEmailButton().click();
         Set<String> handle2 = driver.getWindowHandles();

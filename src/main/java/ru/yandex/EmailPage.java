@@ -1,5 +1,8 @@
 package ru.yandex;
 
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class EmailPage {
+    private static final Logger logger = LogManager.getLogger(EmailPage.class);
+
     public final By EMAIL_LOCATOR_LINK = By.xpath("//a[@data-count='{\"name\":\"logo-service\"}']");
     public final By WRITE_LOCATOR_BUTTON = By.cssSelector("span.mail-ComposeButton-Text");
     public final By RECIPIENT_LOCATOR_TEXTFIELD = By.cssSelector(".tst-field-to  .composeYabbles");
@@ -88,16 +93,20 @@ public class EmailPage {
         getRefreshButton().click();
     }
     public void saveToDisk(){
+        logger.info("Start saving to Disk");
         getSaveToDiskButton().click();
     }
 
     public boolean isOpened() {
+
         boolean result = false;
         try {
             result = getEmaillink() != null;
         } catch (TimeoutException e) {
+            logger.error("Page was not opened");
             result = false;
         }
+        logger.info("Page was opened");
         return result;
     }
 }

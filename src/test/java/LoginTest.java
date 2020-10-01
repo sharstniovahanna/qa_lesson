@@ -11,7 +11,6 @@ import ru.yandex.SearchPage;
 public class LoginTest {
     private WebDriver driver;
 
-
     @BeforeMethod
     public void preSetUp() {
         WebDriverManager.chromedriver().setup();
