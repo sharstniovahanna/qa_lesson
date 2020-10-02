@@ -71,17 +71,8 @@ public class EmailPage {
     public void attachFile(){
         FileCreator.create("random.txt");
         getAttachFileInput().sendKeys("/Users/hsharstniova/IdeaProjects/qa_lesson/random.txt");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".progress_timing_linear")));
         getSendButton().click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         getBackToIncomeMsg().click();
     }
     public WebElement getSaveToDiskButton(){

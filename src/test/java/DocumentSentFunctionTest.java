@@ -11,16 +11,9 @@ import ru.yandex.EmailPage;
 import ru.yandex.LoginPage;
 import ru.yandex.SearchPage;
 
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
-
 public class DocumentSentFunctionTest {
     private WebDriver driver;
+
     @BeforeMethod
     public void preSetUp() {
         WebDriverManager.chromedriver().setup();
@@ -48,12 +41,6 @@ public class DocumentSentFunctionTest {
         emailPage.attachFile();
         emailPage.refreshPage();
         emailPage.saveToDisk();
-
-
-
-
-
-
     }
 
     @AfterMethod

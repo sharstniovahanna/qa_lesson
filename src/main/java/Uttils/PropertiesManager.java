@@ -18,7 +18,8 @@ public class PropertiesManager {
     }
 
     public static String getProperty(String key) {
-        return properties.getProperty(key);}
+        return properties.getProperty(key);
+    }
 
     public static String getProperty(String key, String defaultValue) {
         return properties.getProperty(key, defaultValue);
