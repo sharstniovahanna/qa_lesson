@@ -3,13 +3,15 @@ package ru.yandex;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.UUID;
 
 public class FileCreator {
     public static String ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
 
-    public static void create(String pathname) {
+    public static File create() {
+
         try {
-            File file = new File(pathname);
+            File file = new File(UUID.randomUUID().toString());
             if (file.createNewFile()) {
                 FileWriter writer = new FileWriter(file);
                 StringBuilder stringBuilder = new StringBuilder();
@@ -20,10 +22,12 @@ public class FileCreator {
                 writer.write(stringBuilder.toString());
                 writer.close();
             }
+            return file;
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return null;
     }
 
 

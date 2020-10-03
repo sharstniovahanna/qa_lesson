@@ -10,7 +10,7 @@ public class LoginPage {
     private static final By SUBMIT_BUTTON_LOCATOR = By.xpath(".//*[@type='submit']");
     private static final By PASSWORD_FIELD_LOCATOR = By.name("passwd");
     private final By LOGIN_FIELD_LOCATOR = By.name("login");
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;

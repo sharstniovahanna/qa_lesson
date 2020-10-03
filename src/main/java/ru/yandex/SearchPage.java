@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class SearchPage {
     private static final By ENTER_EMAIL_BUTTON_LOCATOR = By.cssSelector(".desk-notif-card__card > a.button");
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public SearchPage(WebDriver driver) {
         this.driver = driver;
@@ -26,7 +26,7 @@ public class SearchPage {
         driver.switchTo().window((String) array[0]);
     }
 
-    private WebElement getEnterEmailButton() {
+    public WebElement getEnterEmailButton() {
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".desk-notif-card__card > a.button")));
         return driver.findElement(ENTER_EMAIL_BUTTON_LOCATOR);
     }
