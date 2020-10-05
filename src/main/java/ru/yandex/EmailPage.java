@@ -20,9 +20,9 @@ public class EmailPage {
     public final By RECIPIENT_LOCATOR_TEXTFIELD = By.cssSelector(".tst-field-to  .composeYabbles");
     public final By ATTACHFILE_LOCATOR = By.cssSelector(".ComposeAttachFileButton-FileInput");
     public final By SEND_LOCATOR_BUTTON = By.cssSelector(".ComposeControlPanelButton-Button.ComposeControlPanelButton-Button_action");
-    public final By SAVE_TO_DISK_LOCATOR_BUTTON = By.xpath("//a[@title='Сохранить на Диск «random.txt» (20 байт)']");
     public final By BACK_TO_INCOME_MESSG_LINK = By.cssSelector(".ComposeDoneScreen-Link");
     public final By REFRESH_BUTTON_LOCATOR = By.cssSelector(".svgicon-mail--ComposeButton-Refresh");
+    public final By OPEN_DISK_LOCATOR_LINK = By.xpath("//span[text()='Диск']");
     private final WebDriver driver;
     private String attachedFileName;
 
@@ -63,6 +63,11 @@ public class EmailPage {
     public WebElement getRefreshButton() {
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(REFRESH_BUTTON_LOCATOR));
         return driver.findElement(REFRESH_BUTTON_LOCATOR);
+    }
+
+    public WebElement getOpenDiskLink(){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(OPEN_DISK_LOCATOR_LINK));
+        return driver.findElement(OPEN_DISK_LOCATOR_LINK);
     }
 
     public void openMail() {
@@ -108,6 +113,10 @@ public class EmailPage {
         driver.switchTo().frame(driver.findElement(By.cssSelector("iframe.disk-widget-save")));
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[name()='circle' and @fill='#6C6'] ")));
         driver.switchTo().parentFrame();
+    }
+
+    public void openDisk(){
+        getOpenDiskLink().click();
     }
 
     public boolean isOpened() {

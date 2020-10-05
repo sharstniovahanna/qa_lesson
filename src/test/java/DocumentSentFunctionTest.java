@@ -43,6 +43,8 @@ public class DocumentSentFunctionTest {
         emailPage.returnToIncomeMsg();
         emailPage.refreshPage();
         emailPage.saveToDisk();
+        emailPage.openDisk();
+
     }
 
     @AfterMethod
