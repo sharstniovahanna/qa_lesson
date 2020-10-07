@@ -15,4 +15,8 @@ public class WaitManager {
     public void waitUntilpresenceOfElementLocated(By locator){
         new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(locator));
     }
+
+    public void waitUntilInvisibilityOfElementLocated(By locator){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
 }

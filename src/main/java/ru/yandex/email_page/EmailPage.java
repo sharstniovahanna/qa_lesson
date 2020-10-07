@@ -8,8 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 
@@ -23,6 +21,7 @@ public class EmailPage {
     private static final By WRITE_BUTTON_LOCATOR = By.cssSelector("span.mail-ComposeButton-Text");
     private static final By SAVED_TO_DISK_IFRAME_LOCATOR = By.cssSelector("iframe.disk-widget-save");
     private static final By GREEN_CIRCLE_PICTURE_LOCATOR = By.xpath("//*[name()='circle' and @fill='#6C6']");
+    private static final String SAVE_TO_DISK_BUTTON_LOCATOR_TEMPLATE = "//*[name()='svg' and contains(@class,'Attach-Download_Disk')]/parent::a[contains(@title,'%s')]";
     private final WebDriver driver;
     private String attachedFileName;
     private static final Logger logger = LogManager.getLogger(EmailPage.class);
@@ -83,7 +82,7 @@ public class EmailPage {
         File file = FileCreator.create();
         String absolutePath = file.getAbsolutePath();
         getAttachFileInput().sendKeys(absolutePath);
-        new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".progress_timing_linear")));
+        new WaitManager(driver).waitUntilInvisibilityOfElementLocated(By.cssSelector(".progress_timing_linear"));
         attachedFileName = file.getName();
         file.delete();
     }
@@ -97,7 +96,7 @@ public class EmailPage {
     }
 
     public WebElement getSaveToDiskButton() {
-        String xpathOfAttachedFile = "//*[name()='svg' and contains(@class,'Attach-Download_Disk')]/parent::a[contains(@title,'" + attachedFileName + "')]";
+        String xpathOfAttachedFile = String.format(SAVE_TO_DISK_BUTTON_LOCATOR_TEMPLATE,attachedFileName);
         By selectorOfAttachedFile = By.xpath(xpathOfAttachedFile);
         new WaitManager(driver).waitUntilpresenceOfElementLocated(selectorOfAttachedFile);
         return driver.findElement(selectorOfAttachedFile);

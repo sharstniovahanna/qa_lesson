@@ -1,30 +1,13 @@
-import uttils.PropertiesManager;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.email_page.EmailPage;
 import ru.yandex.email_page.LoginPage;
 import ru.yandex.email_page.SearchPage;
 import ru.yandex.yandex_disk.YandexDiskPage;
+import uttils.PropertiesManager;
 
-public class DocumentSentFunctionTest {
-    private WebDriver driver;
+public class DocumentSentFunctionTest extends AbstractTest {
 
-    @BeforeMethod
-    public void preSetUp() {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.get(PropertiesManager.getProperty("base_url"));
-
-    }
 
     @Test
     public void positiveLoginTest() {
@@ -53,11 +36,7 @@ public class DocumentSentFunctionTest {
 
     }
 
-    @AfterMethod
-    public void teardown() {
-        driver.close();
-        driver.quit();
-    }
+
 }
 
 
