@@ -1,4 +1,4 @@
-package ru.yandex;
+package ru.yandex.email_page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

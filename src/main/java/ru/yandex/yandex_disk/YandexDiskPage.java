@@ -1,11 +1,11 @@
-package ru.yandex.YandexDisk;
+package ru.yandex.yandex_disk;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.yandex.EmailPage;
+import ru.yandex.email_page.EmailPage;
 
 import java.util.Set;
 

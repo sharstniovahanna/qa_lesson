@@ -7,9 +7,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import ru.yandex.EmailPage;
-import ru.yandex.LoginPage;
-import ru.yandex.SearchPage;
+import ru.yandex.email_page.EmailPage;
+import ru.yandex.email_page.LoginPage;
+import ru.yandex.email_page.SearchPage;
 
 @Listeners(io.qameta.allure.testng.AllureTestNg.class)
 public class LoginTest {

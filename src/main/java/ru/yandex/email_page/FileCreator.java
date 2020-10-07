@@ -1,4 +1,4 @@
-package ru.yandex;
+package ru.yandex.email_page;
 
 import java.io.File;
 import java.io.FileWriter;

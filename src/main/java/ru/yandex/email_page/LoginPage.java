@@ -1,5 +1,6 @@
-package ru.yandex;
+package ru.yandex.email_page;
 
+import help_services.WaitManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,17 +18,17 @@ public class LoginPage {
     }
 
     public WebElement getLoginField() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.presenceOfElementLocated(LOGIN_FIELD_LOCATOR));
+        new WaitManager(driver).waitUntilpresenceOfElementLocated(LOGIN_FIELD_LOCATOR);
         return driver.findElement(LOGIN_FIELD_LOCATOR);
     }
 
     public WebElement getSubmitButton() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(SUBMIT_BUTTON_LOCATOR));
+        new WaitManager(driver).waitUntilpresenceOfElementLocated(SUBMIT_BUTTON_LOCATOR);
         return driver.findElement(SUBMIT_BUTTON_LOCATOR);
     }
 
     public WebElement getPasswordField() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(PASSWORD_FIELD_LOCATOR));
+        new WaitManager(driver).waitUntilpresenceOfElementLocated(PASSWORD_FIELD_LOCATOR);
         return driver.findElement(PASSWORD_FIELD_LOCATOR);
     }
 
