@@ -13,16 +13,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 
 public class EmailPage {
+    private static final By EMAIL_LINK_LOCATOR = By.xpath("//a[@data-count='{\"name\":\"logo-service\"}']");
+    private static final By RECIPIENT_TEXTFIELD_LOCATOR = By.cssSelector(".tst-field-to  .composeYabbles");
+    private static final By ATTACHFILE_LOCATOR = By.cssSelector(".ComposeAttachFileButton-FileInput");
+    private static final By SEND_BUTTON_LOCATOR = By.cssSelector(".ComposeControlPanelButton-Button.ComposeControlPanelButton-Button_action");
+    private static final By BACK_TO_INCOME_MESSG_LINK_LOCATOR = By.cssSelector(".ComposeDoneScreen-Link");
+    private static final By REFRESH_BUTTON_LOCATOR = By.cssSelector(".svgicon-mail--ComposeButton-Refresh");
     private static final Logger logger = LogManager.getLogger(EmailPage.class);
-
-    public final By EMAIL_LOCATOR_LINK = By.xpath("//a[@data-count='{\"name\":\"logo-service\"}']");
-    public final By WRITE_LOCATOR_BUTTON = By.cssSelector("span.mail-ComposeButton-Text");
-    public final By RECIPIENT_LOCATOR_TEXTFIELD = By.cssSelector(".tst-field-to  .composeYabbles");
-    public final By ATTACHFILE_LOCATOR = By.cssSelector(".ComposeAttachFileButton-FileInput");
-    public final By SEND_LOCATOR_BUTTON = By.cssSelector(".ComposeControlPanelButton-Button.ComposeControlPanelButton-Button_action");
-    public final By BACK_TO_INCOME_MESSG_LINK = By.cssSelector(".ComposeDoneScreen-Link");
-    public final By REFRESH_BUTTON_LOCATOR = By.cssSelector(".svgicon-mail--ComposeButton-Refresh");
-    public final By OPEN_DISK_LOCATOR_LINK = By.xpath("//span[text()='Диск']");
+    private static final By WRITE_BUTTON_LOCATOR = By.cssSelector("span.mail-ComposeButton-Text");
+    private static final By SAVED_TO_DISK_IFRAME_LOCATOR = By.cssSelector("iframe.disk-widget-save");
+    private static final By GREEN_CIRCLE_PICTURE_LOCATOR = By.xpath("//*[name()='circle' and @fill='#6C6']");
     private final WebDriver driver;
     private String attachedFileName;
 
@@ -30,19 +30,23 @@ public class EmailPage {
         this.driver = driver;
     }
 
+    public String getAttachedFileName() {
+        return attachedFileName;
+    }
+
     public WebElement getEmaillink() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(EMAIL_LOCATOR_LINK));
-        return driver.findElement(EMAIL_LOCATOR_LINK);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(EMAIL_LINK_LOCATOR));
+        return driver.findElement(EMAIL_LINK_LOCATOR);
     }
 
     public WebElement getWriteButton() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(WRITE_LOCATOR_BUTTON));
-        return driver.findElement(WRITE_LOCATOR_BUTTON);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(WRITE_BUTTON_LOCATOR));
+        return driver.findElement(WRITE_BUTTON_LOCATOR);
     }
 
     public WebElement getRecipientTextField() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".tst-field-to  .composeYabbles")));
-        return driver.findElement(RECIPIENT_LOCATOR_TEXTFIELD);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(RECIPIENT_TEXTFIELD_LOCATOR));
+        return driver.findElement(RECIPIENT_TEXTFIELD_LOCATOR);
     }
 
     public WebElement getAttachFileInput() {
@@ -51,13 +55,13 @@ public class EmailPage {
     }
 
     public WebElement getSendButton() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(SEND_LOCATOR_BUTTON));
-        return driver.findElement(SEND_LOCATOR_BUTTON);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(SEND_BUTTON_LOCATOR));
+        return driver.findElement(SEND_BUTTON_LOCATOR);
     }
 
     public WebElement getBackToIncomeMsg() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(BACK_TO_INCOME_MESSG_LINK));
-        return driver.findElement(BACK_TO_INCOME_MESSG_LINK);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(BACK_TO_INCOME_MESSG_LINK_LOCATOR));
+        return driver.findElement(BACK_TO_INCOME_MESSG_LINK_LOCATOR);
     }
 
     public WebElement getRefreshButton() {
@@ -65,10 +69,6 @@ public class EmailPage {
         return driver.findElement(REFRESH_BUTTON_LOCATOR);
     }
 
-    public WebElement getOpenDiskLink(){
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(OPEN_DISK_LOCATOR_LINK));
-        return driver.findElement(OPEN_DISK_LOCATOR_LINK);
-    }
 
     public void openMail() {
         getWriteButton().click();
@@ -97,9 +97,9 @@ public class EmailPage {
 
     public WebElement getSaveToDiskButton() {
         String xpathOfAttachedFile = "//*[name()='svg' and contains(@class,'Attach-Download_Disk')]/parent::a[contains(@title,'" + attachedFileName + "')]";
-        By SELECTOR_OF_ATTACHED_FILE = By.xpath(xpathOfAttachedFile);
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(SELECTOR_OF_ATTACHED_FILE));
-        return driver.findElement(SELECTOR_OF_ATTACHED_FILE);
+        By selectorOfAttachedFile = By.xpath(xpathOfAttachedFile);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(selectorOfAttachedFile));
+        return driver.findElement(selectorOfAttachedFile);
     }
 
     public void refreshPage() {
@@ -109,14 +109,10 @@ public class EmailPage {
     public void saveToDisk() {
         logger.info("Start saving to Disk " + attachedFileName);
         getSaveToDiskButton().click();
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("iframe.disk-widget-save")));
-        driver.switchTo().frame(driver.findElement(By.cssSelector("iframe.disk-widget-save")));
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[name()='circle' and @fill='#6C6'] ")));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(SAVED_TO_DISK_IFRAME_LOCATOR));
+        driver.switchTo().frame(driver.findElement(SAVED_TO_DISK_IFRAME_LOCATOR));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(GREEN_CIRCLE_PICTURE_LOCATOR));
         driver.switchTo().parentFrame();
-    }
-
-    public void openDisk(){
-        getOpenDiskLink().click();
     }
 
     public boolean isOpened() {

@@ -1,4 +1,4 @@
-import Uttils.PropertiesManager;
+import uttils.PropertiesManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import ru.yandex.EmailPage;
 import ru.yandex.LoginPage;
 import ru.yandex.SearchPage;
+import ru.yandex.YandexDisk.YandexDiskPage;
 
 public class DocumentSentFunctionTest {
     private WebDriver driver;
@@ -17,16 +18,18 @@ public class DocumentSentFunctionTest {
     @BeforeMethod
     public void preSetUp() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
         driver.get(PropertiesManager.getProperty("base_url"));
+
     }
 
     @Test
     public void positiveLoginTest() {
         SearchPage searchPage = new SearchPage(driver);
-        searchPage.goToMail();
+        searchPage.goToLoginPage();
         LoginPage loginPage = new LoginPage(driver);
         loginPage.loginWithCreds(
                 PropertiesManager.getProperty("correct_username"),
@@ -43,7 +46,10 @@ public class DocumentSentFunctionTest {
         emailPage.returnToIncomeMsg();
         emailPage.refreshPage();
         emailPage.saveToDisk();
-        emailPage.openDisk();
+        YandexDiskPage yandexDisk = new YandexDiskPage(driver);
+        yandexDisk.goToYandexDisk();
+        yandexDisk.openDownloadsFolder();
+//        yandexDisk.clickDownloadedFile();
 
     }
 

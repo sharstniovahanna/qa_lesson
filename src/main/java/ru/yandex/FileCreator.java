@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class FileCreator {
-    public static String ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
+    private static String ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
 
     public static File create() {
 

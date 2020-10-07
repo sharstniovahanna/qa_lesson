@@ -27,7 +27,7 @@ public class LoginTest {
     @Test
     public void positiveLoginTest() {
         SearchPage searchPage = new SearchPage(driver);
-        searchPage.goToMail();
+        searchPage.goToLoginPage();
         LoginPage loginPage = new LoginPage(driver);
         loginPage.loginWithCreds("sharstniovaH", "123456!");
         EmailPage emailPage = new EmailPage(driver);

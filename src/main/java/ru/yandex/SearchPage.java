@@ -16,7 +16,7 @@ public class SearchPage {
         this.driver = driver;
     }
 
-    public void goToMail() {
+    public void goToLoginPage() {
 
         Set<String> handle1 = driver.getWindowHandles();
         getEnterEmailButton().click();
@@ -27,7 +27,7 @@ public class SearchPage {
     }
 
     public WebElement getEnterEmailButton() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".desk-notif-card__card > a.button")));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(ENTER_EMAIL_BUTTON_LOCATOR));
         return driver.findElement(ENTER_EMAIL_BUTTON_LOCATOR);
     }
 

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class LoginPage {
     private static final By SUBMIT_BUTTON_LOCATOR = By.xpath(".//*[@type='submit']");
     private static final By PASSWORD_FIELD_LOCATOR = By.name("passwd");
-    private final By LOGIN_FIELD_LOCATOR = By.name("login");
+    private static final By LOGIN_FIELD_LOCATOR = By.name("login");
     private final WebDriver driver;
 
     public LoginPage(WebDriver driver) {
@@ -17,17 +17,17 @@ public class LoginPage {
     }
 
     public WebElement getLoginField() {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.presenceOfElementLocated(By.name("login")));
+        new WebDriverWait(driver, 20).until(ExpectedConditions.presenceOfElementLocated(LOGIN_FIELD_LOCATOR));
         return driver.findElement(LOGIN_FIELD_LOCATOR);
     }
 
     public WebElement getSubmitButton() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@type='submit']")));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(SUBMIT_BUTTON_LOCATOR));
         return driver.findElement(SUBMIT_BUTTON_LOCATOR);
     }
 
     public WebElement getPasswordField() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.name("passwd")));
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(PASSWORD_FIELD_LOCATOR));
         return driver.findElement(PASSWORD_FIELD_LOCATOR);
     }
 
@@ -36,7 +36,6 @@ public class LoginPage {
         getSubmitButton().click();
         getPasswordField().sendKeys(password);
         getSubmitButton().click();
-
     }
 
 }
