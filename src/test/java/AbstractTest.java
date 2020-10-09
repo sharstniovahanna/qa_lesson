@@ -23,5 +23,6 @@ public class AbstractTest {
     public void teardown() {
         driver.close();
         driver.quit();
+
     }
 }

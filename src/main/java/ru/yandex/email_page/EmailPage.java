@@ -25,13 +25,9 @@ public class EmailPage extends AbstractPage {
     private static final String SAVE_TO_DISK_BUTTON_LOCATOR_TEMPLATE = "//*[name()='svg' and contains(@class,'Attach-Download_Disk')]/parent::a[contains(@title,'%s')]";
     private static final Logger logger = LogManager.getLogger(EmailPage.class);
 
-    private String attachedFileName;
-
     public EmailPage(WebDriver driver) {
         super.driver = driver;
     }
-
-
 
     public WebElement getWriteButton() {
         new WaitManager(driver).waitUntilpresenceOfElementLocated(WRITE_BUTTON_LOCATOR);
@@ -72,13 +68,10 @@ public class EmailPage extends AbstractPage {
         getRecipientTextField().sendKeys(emailAddress);
     }
 
-    public void attachFile() {
-        File file = FileCreator.create();
+    public void attachFile(File file) {
         String absolutePath = file.getAbsolutePath();
         getAttachFileInput().sendKeys(absolutePath);
         new WaitManager(driver).waitUntilInvisibilityOfElementLocated(By.cssSelector(".progress_timing_linear"));
-        attachedFileName = file.getName();
-        file.delete();
     }
 
     public void sendEmail() {
@@ -89,8 +82,8 @@ public class EmailPage extends AbstractPage {
         getBackToIncomeMsg().click();
     }
 
-    public WebElement getSaveToDiskButton() {
-        String xpathOfAttachedFile = String.format(SAVE_TO_DISK_BUTTON_LOCATOR_TEMPLATE, attachedFileName);
+    public WebElement getSaveToDiskButton(File file) {
+        String xpathOfAttachedFile = String.format(SAVE_TO_DISK_BUTTON_LOCATOR_TEMPLATE, file.getName());
         By selectorOfAttachedFile = By.xpath(xpathOfAttachedFile);
         new WaitManager(driver).waitUntilpresenceOfElementLocated(selectorOfAttachedFile);
         return driver.findElement(selectorOfAttachedFile);
@@ -100,9 +93,9 @@ public class EmailPage extends AbstractPage {
         getRefreshButton().click();
     }
 
-    public void saveToDisk() {
-        logger.info("Start saving to Disk " + attachedFileName);
-        getSaveToDiskButton().click();
+    public void saveToDisk(File file) {
+        logger.info("Start saving to Disk " + file.getName());
+        getSaveToDiskButton(file).click();
         new WaitManager(driver).waitUntilpresenceOfElementLocated(SAVED_TO_DISK_IFRAME_LOCATOR);
         driver.switchTo().frame(driver.findElement(SAVED_TO_DISK_IFRAME_LOCATOR));
         new WaitManager(driver).waitUntilpresenceOfElementLocated(GREEN_CIRCLE_PICTURE_LOCATOR);
