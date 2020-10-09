@@ -23,6 +23,7 @@ public class DocumentSentFunctionTest extends AbstractTest {
         emailPage.openMail();
         emailPage.setRecipient(
                 PropertiesManager.getProperty("correct_recipient")
+
         );
         emailPage.attachFile();
         emailPage.sendEmail();

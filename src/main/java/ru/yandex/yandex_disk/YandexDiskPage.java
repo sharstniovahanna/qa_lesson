@@ -1,5 +1,6 @@
 package ru.yandex.yandex_disk;
 
+import help_services.AbstractPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,16 +10,14 @@ import ru.yandex.email_page.EmailPage;
 
 import java.util.Set;
 
-public class YandexDiskPage {
+public class YandexDiskPage extends AbstractPage {
     public final By OPEN_DISK_LOCATOR_LINK = By.xpath("//span[text()='Диск']");
     public final By DOWNLOADS_FOLDER_BUTTON = By.cssSelector("a.navigation__link_downloads");
     EmailPage name;
-    private final WebDriver driver;
 //    private final String downloadedFileName = name.getAttachedFileName();
 
-
     public YandexDiskPage(WebDriver driver) {
-        this.driver = driver;
+        super.driver = driver;
     }
 
  /*   public WebElement getDownloadedFileButton() {

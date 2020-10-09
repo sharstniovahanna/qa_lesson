@@ -1,5 +1,6 @@
 package ru.yandex.email_page;
 
+import help_services.AbstractPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,12 +9,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Set;
 
-public class SearchPage {
+public class SearchPage extends AbstractPage {
     private static final By ENTER_EMAIL_BUTTON_LOCATOR = By.cssSelector(".desk-notif-card__card > a.button");
-    private final WebDriver driver;
 
     public SearchPage(WebDriver driver) {
-        this.driver = driver;
+        super.driver = driver;
     }
 
     public void goToLoginPage() {

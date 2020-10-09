@@ -11,7 +11,7 @@ public class FileCreator {
     public static File create() {
 
         try {
-            File file = new File(UUID.randomUUID().toString());
+            File file = new File(UUID.randomUUID().toString()+ ".txt");
             if (file.createNewFile()) {
                 FileWriter writer = new FileWriter(file);
                 StringBuilder stringBuilder = new StringBuilder();

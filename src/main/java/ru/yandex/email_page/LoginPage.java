@@ -1,5 +1,6 @@
 package ru.yandex.email_page;
 
+import help_services.AbstractPage;
 import help_services.WaitManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,14 +8,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage {
+public class LoginPage extends AbstractPage {
     private static final By SUBMIT_BUTTON_LOCATOR = By.xpath(".//*[@type='submit']");
     private static final By PASSWORD_FIELD_LOCATOR = By.name("passwd");
     private static final By LOGIN_FIELD_LOCATOR = By.name("login");
-    private final WebDriver driver;
+
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super.driver = driver;
     }
 
     public WebElement getLoginField() {

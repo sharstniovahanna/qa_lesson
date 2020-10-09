@@ -1,6 +1,7 @@
 package ru.yandex.email_page;
 
 
+import help_services.AbstractPage;
 import help_services.WaitManager;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -11,10 +12,10 @@ import org.openqa.selenium.WebElement;
 
 import java.io.File;
 
-public class EmailPage {
-    private static final By EMAIL_LINK_LOCATOR = By.xpath("//a[@data-count='{\"name\":\"logo-service\"}']");
+public class EmailPage extends AbstractPage {
+    private static final By EMAIL_LINK_LOGO_LOCATOR = By.xpath("//a[@data-count='{\"name\":\"logo-service\"}']");
     private static final By RECIPIENT_TEXTFIELD_LOCATOR = By.cssSelector(".tst-field-to  .composeYabbles");
-    private static final By ATTACHFILE_LOCATOR = By.cssSelector(".ComposeAttachFileButton-FileInput");
+    private static final By ATTACHFILE_LOCATOR = By.cssSelector(".ComposeAttachmentSourcesMenu-FileInput");
     private static final By SEND_BUTTON_LOCATOR = By.cssSelector(".ComposeControlPanelButton-Button.ComposeControlPanelButton-Button_action");
     private static final By BACK_TO_INCOME_MESSG_LINK_LOCATOR = By.cssSelector(".ComposeDoneScreen-Link");
     private static final By REFRESH_BUTTON_LOCATOR = By.cssSelector(".svgicon-mail--ComposeButton-Refresh");
@@ -22,22 +23,15 @@ public class EmailPage {
     private static final By SAVED_TO_DISK_IFRAME_LOCATOR = By.cssSelector("iframe.disk-widget-save");
     private static final By GREEN_CIRCLE_PICTURE_LOCATOR = By.xpath("//*[name()='circle' and @fill='#6C6']");
     private static final String SAVE_TO_DISK_BUTTON_LOCATOR_TEMPLATE = "//*[name()='svg' and contains(@class,'Attach-Download_Disk')]/parent::a[contains(@title,'%s')]";
-    private final WebDriver driver;
-    private String attachedFileName;
     private static final Logger logger = LogManager.getLogger(EmailPage.class);
 
+    private String attachedFileName;
+
     public EmailPage(WebDriver driver) {
-        this.driver = driver;
+        super.driver = driver;
     }
 
-    public String getAttachedFileName() {
-        return attachedFileName;
-    }
 
-    public WebElement getEmaillink() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(EMAIL_LINK_LOCATOR);
-        return driver.findElement(EMAIL_LINK_LOCATOR);
-    }
 
     public WebElement getWriteButton() {
         new WaitManager(driver).waitUntilpresenceOfElementLocated(WRITE_BUTTON_LOCATOR);
@@ -74,7 +68,7 @@ public class EmailPage {
         getWriteButton().click();
     }
 
-    public void setRecipient(String emailAddress) {
+    public void setRecipient(String ...emailAddress) {
         getRecipientTextField().sendKeys(emailAddress);
     }
 
@@ -96,7 +90,7 @@ public class EmailPage {
     }
 
     public WebElement getSaveToDiskButton() {
-        String xpathOfAttachedFile = String.format(SAVE_TO_DISK_BUTTON_LOCATOR_TEMPLATE,attachedFileName);
+        String xpathOfAttachedFile = String.format(SAVE_TO_DISK_BUTTON_LOCATOR_TEMPLATE, attachedFileName);
         By selectorOfAttachedFile = By.xpath(xpathOfAttachedFile);
         new WaitManager(driver).waitUntilpresenceOfElementLocated(selectorOfAttachedFile);
         return driver.findElement(selectorOfAttachedFile);
@@ -116,15 +110,13 @@ public class EmailPage {
     }
 
     public boolean isOpened() {
-
-        boolean result = false;
         try {
-            result = getEmaillink() != null;
+            new WaitManager(driver).waitUntilInvisibilityOfElementLocated(EMAIL_LINK_LOGO_LOCATOR);
+            return true;
         } catch (TimeoutException e) {
             logger.error("Page was not opened");
-            result = false;
+            return false;
         }
-        logger.info("Page was opened");
-        return result;
+
     }
 }
