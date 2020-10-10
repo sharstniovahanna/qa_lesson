@@ -15,7 +15,7 @@ public class YandexDiskPage extends AbstractPage {
     public final By OPEN_DISK_LINK_LOCATOR = By.xpath("//span[text()='Диск']");
     public final By DOWNLOADS_FOLDER_BUTTON_LOCATOR = By.cssSelector("a.navigation__link_downloads");
     private final By MOVE_BUTTON_LOCATOR = By.cssSelector(".groupable-buttons__visible-button_name_move");
-    private final By CONFIRMATION_MOVE_BUTTON_LOCATOR = By.xpath("//div[@class='confirmation-dialog__footer']//span[@class='button2__text'and contains(text(), 'Переместить')]");
+    private final By CONFIRMATION_MOVE_BUTTON_LOCATOR = By.cssSelector(".modal_visible_yes .confirmation-dialog__button_submit");
 
     public YandexDiskPage(WebDriver driver) {
         super.driver = driver;
@@ -65,8 +65,9 @@ public class YandexDiskPage extends AbstractPage {
 
     public void moveFileToGeneralFolder(){
         getMoveButton().click();
+        new WaitManager(driver).waitUntilpresenceOfElementLocated(By.cssSelector(".modal_visible_yes .select-folder-dialog__tree"));
         getConfirmationMoveButton().click();
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(By.cssSelector(".notifications__item_moved"));
+//        new WaitManager(driver).waitUntilpresenceOfElementLocated(By.cssSelector(".notifications__item_moved"));
     }
 
     public void openDownloadsFolder() {
