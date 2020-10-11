@@ -57,6 +57,11 @@ public class DocumentSentFunctionTest extends AbstractTest {
         yandexDisk.openDownloadsFolder();
         yandexDisk.clickDownloadedFile(attachedFile);
         yandexDisk.moveFileToGeneralFolder();
+        yandexDisk.goToFileSectionOnDisk();
+        yandexDisk.dragAndDrop(attachedFile);
+        yandexDisk.isFileDeleted();
+
+
 
 
     }

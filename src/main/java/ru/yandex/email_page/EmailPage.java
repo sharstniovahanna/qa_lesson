@@ -104,7 +104,7 @@ public class EmailPage extends AbstractPage {
 
     public boolean isOpened() {
         try {
-            new WaitManager(driver).waitUntilInvisibilityOfElementLocated(EMAIL_LINK_LOGO_LOCATOR);
+            new WaitManager(driver).waitUntilpresenceOfElementLocated(EMAIL_LINK_LOGO_LOCATOR);
             return true;
         } catch (TimeoutException e) {
             logger.error("Page was not opened");
