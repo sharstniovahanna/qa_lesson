@@ -5,11 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class WaitManager {
-    private final WebDriver driver;
+public class WaitManager extends AbstractPage{
 
     public WaitManager(WebDriver driver) {
-        this.driver = driver;
+        super.driver = driver;
     }
 
     public void waitUntilpresenceOfElementLocated(By locator){
