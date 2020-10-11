@@ -85,7 +85,6 @@ public class YandexDiskPage extends AbstractPage {
             e.printStackTrace();
         }
         getConfirmationMoveButton().click();
-//        new WaitManager(driver).waitUntilpresenceOfElementLocated(By.cssSelector(".notifications__item_moved"));
     }
 
     public WebElement getTrash() {
@@ -117,4 +116,5 @@ public class YandexDiskPage extends AbstractPage {
     }
 
 }
+
 

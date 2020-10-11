@@ -25,7 +25,7 @@ public class DocumentSentFunctionTest extends AbstractTest {
     @Override
     public void teardown() {
         super.teardown();
-        if (attachedFile!=null){
+        if (attachedFile != null) {
             attachedFile.delete();
         }
     }
@@ -60,13 +60,7 @@ public class DocumentSentFunctionTest extends AbstractTest {
         yandexDisk.goToFileSectionOnDisk();
         yandexDisk.dragAndDrop(attachedFile);
         yandexDisk.isFileDeleted();
-
-
-
-
     }
-
-
 }
 
 
