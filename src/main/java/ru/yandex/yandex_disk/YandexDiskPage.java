@@ -21,13 +21,16 @@ public class YandexDiskPage extends AbstractPage {
     private final By FILE_BUTTON_LOCATOR = By.cssSelector(".navigation__link_current");
     private final By TRASH_DRAG_AND_DROP = By.xpath("//span[contains(@class, \"file-icon_dir_trash\") or contains(@class, \"file-icon_dir_trash-full\")]/../../parent::div[contains(@class, \"js-prevent-drag\")]");
     private final By FILE_REMOVED_POP_UP_LOCATOR = By.cssSelector(".notifications__item_moved");
+    private final By FOLDER_TREE_ELEMENT_LOCATOR = By.cssSelector(".modal_visible_yes .select-folder-dialog__tree");
+    private static final String DOWNLOADED_FILE_LOCATOR = "//span[contains(@title, '%s')]/../../parent::div[contains(@class, \"js-prevent-deselect\")]";
 
     public YandexDiskPage(WebDriver driver) {
         super.driver = driver;
     }
 
     public WebElement getDownloadedFileButton(File file) {
-        String xpathOfDownloadedFile = "//span[contains(@title, '" + file.getName() + "')]/../../parent::div[contains(@class, \"js-prevent-deselect\")]";
+
+        String xpathOfDownloadedFile = String.format(DOWNLOADED_FILE_LOCATOR,file.getName());
         By DOWNLOADED_FILE_LOCATOR_BUTTON = By.xpath(xpathOfDownloadedFile);
         new WaitManager(driver).waitUntilpresenceOfElementLocated(DOWNLOADED_FILE_LOCATOR_BUTTON);
         return driver.findElement(DOWNLOADED_FILE_LOCATOR_BUTTON);
@@ -52,10 +55,6 @@ public class YandexDiskPage extends AbstractPage {
         return driver.findElement(MOVE_BUTTON_LOCATOR);
     }
 
-    public WebElement getFileRemovedPopUp() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(FILE_REMOVED_POP_UP_LOCATOR);
-        return driver.findElement(FILE_REMOVED_POP_UP_LOCATOR);
-    }
 
     public WebElement getFileButton() {
         return driver.findElement(FILE_BUTTON_LOCATOR);
@@ -78,7 +77,7 @@ public class YandexDiskPage extends AbstractPage {
 
     public void moveFileToGeneralFolder() {
         getMoveButton().click();
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(By.cssSelector(".modal_visible_yes .select-folder-dialog__tree"));
+        new WaitManager(driver).waitUntilpresenceOfElementLocated(FOLDER_TREE_ELEMENT_LOCATOR);
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
