@@ -30,32 +30,32 @@ public class EmailPage extends AbstractPage {
     }
 
     public WebElement getWriteButton() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(WRITE_BUTTON_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(WRITE_BUTTON_LOCATOR);
         return driver.findElement(WRITE_BUTTON_LOCATOR);
     }
 
     public WebElement getRecipientTextField() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(RECIPIENT_TEXTFIELD_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(RECIPIENT_TEXTFIELD_LOCATOR);
         return driver.findElement(RECIPIENT_TEXTFIELD_LOCATOR);
     }
 
     public WebElement getAttachFileInput() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(ATTACHFILE_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(ATTACHFILE_LOCATOR);
         return driver.findElement(ATTACHFILE_LOCATOR);
     }
 
     public WebElement getSendButton() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(SEND_BUTTON_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(SEND_BUTTON_LOCATOR);
         return driver.findElement(SEND_BUTTON_LOCATOR);
     }
 
     public WebElement getBackToIncomeMsg() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(BACK_TO_INCOME_MESSG_LINK_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(BACK_TO_INCOME_MESSG_LINK_LOCATOR);
         return driver.findElement(BACK_TO_INCOME_MESSG_LINK_LOCATOR);
     }
 
     public WebElement getRefreshButton() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(REFRESH_BUTTON_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(REFRESH_BUTTON_LOCATOR);
         return driver.findElement(REFRESH_BUTTON_LOCATOR);
     }
 
@@ -85,7 +85,7 @@ public class EmailPage extends AbstractPage {
     public WebElement getSaveToDiskButton(File file) {
         String xpathOfAttachedFile = String.format(SAVE_TO_DISK_BUTTON_LOCATOR_TEMPLATE, file.getName());
         By selectorOfAttachedFile = By.xpath(xpathOfAttachedFile);
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(selectorOfAttachedFile);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(selectorOfAttachedFile);
         return driver.findElement(selectorOfAttachedFile);
     }
 
@@ -96,15 +96,15 @@ public class EmailPage extends AbstractPage {
     public void saveToDisk(File file) {
         logger.info("Start saving to Disk " + file.getName());
         getSaveToDiskButton(file).click();
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(SAVED_TO_DISK_IFRAME_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(SAVED_TO_DISK_IFRAME_LOCATOR);
         driver.switchTo().frame(driver.findElement(SAVED_TO_DISK_IFRAME_LOCATOR));
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(GREEN_CIRCLE_PICTURE_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(GREEN_CIRCLE_PICTURE_LOCATOR);
         driver.switchTo().parentFrame();
     }
 
     public boolean isOpened() {
         try {
-            new WaitManager(driver).waitUntilpresenceOfElementLocated(EMAIL_LINK_LOGO_LOCATOR);
+            new WaitManager(driver).waitUntilPresenceOfElementLocated(EMAIL_LINK_LOGO_LOCATOR);
             return true;
         } catch (TimeoutException e) {
             logger.error("Page was not opened");

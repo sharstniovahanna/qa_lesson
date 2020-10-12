@@ -1,6 +1,9 @@
+import junit.framework.TestListener;
+import listners.TestListner;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.email_page.EmailPage;
 import ru.yandex.email_page.FileCreator;
@@ -10,21 +13,20 @@ import ru.yandex.yandex_disk.YandexDiskPage;
 import uttils.PropertiesManager;
 
 import java.io.File;
+@Listeners({io.qameta.allure.testng.AllureTestNg.class, TestListner.class})
 
 public class DocumentSentFunctionTest extends AbstractTest {
     private File attachedFile;
 
     @BeforeMethod
-    @Override
-    public void preSetUp() {
-        super.preSetUp();
+
+    public void preSetUp2() {
         attachedFile = FileCreator.create();
     }
 
     @AfterMethod
-    @Override
-    public void teardown() {
-        super.teardown();
+
+    public void teardown2() {
         if (attachedFile != null) {
             attachedFile.delete();
         }

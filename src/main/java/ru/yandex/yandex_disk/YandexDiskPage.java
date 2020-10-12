@@ -32,7 +32,7 @@ public class YandexDiskPage extends AbstractPage {
 
         String xpathOfDownloadedFile = String.format(DOWNLOADED_FILE_LOCATOR,file.getName());
         By DOWNLOADED_FILE_LOCATOR_BUTTON = By.xpath(xpathOfDownloadedFile);
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(DOWNLOADED_FILE_LOCATOR_BUTTON);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(DOWNLOADED_FILE_LOCATOR_BUTTON);
         return driver.findElement(DOWNLOADED_FILE_LOCATOR_BUTTON);
     }
 
@@ -46,12 +46,12 @@ public class YandexDiskPage extends AbstractPage {
     }
 
     public WebElement getDownloadsFolderButton() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(DOWNLOADS_FOLDER_BUTTON_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(DOWNLOADS_FOLDER_BUTTON_LOCATOR);
         return driver.findElement(DOWNLOADS_FOLDER_BUTTON_LOCATOR);
     }
 
     public WebElement getMoveButton() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(MOVE_BUTTON_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(MOVE_BUTTON_LOCATOR);
         return driver.findElement(MOVE_BUTTON_LOCATOR);
     }
 
@@ -61,7 +61,7 @@ public class YandexDiskPage extends AbstractPage {
     }
 
     public WebElement getConfirmationMoveButton() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(CONFIRMATION_MOVE_BUTTON_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(CONFIRMATION_MOVE_BUTTON_LOCATOR);
         return driver.findElement(CONFIRMATION_MOVE_BUTTON_LOCATOR);
     }
 
@@ -77,17 +77,13 @@ public class YandexDiskPage extends AbstractPage {
 
     public void moveFileToGeneralFolder() {
         getMoveButton().click();
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(FOLDER_TREE_ELEMENT_LOCATOR);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(FOLDER_TREE_ELEMENT_LOCATOR);
+        new WaitManager(driver).waitUntilElementToBeClickable(CONFIRMATION_MOVE_BUTTON_LOCATOR);
         getConfirmationMoveButton().click();
     }
 
     public WebElement getTrash() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(TRASH_DRAG_AND_DROP);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(TRASH_DRAG_AND_DROP);
         return driver.findElement(TRASH_DRAG_AND_DROP);
     }
 
@@ -107,7 +103,7 @@ public class YandexDiskPage extends AbstractPage {
 
     public boolean isFileDeleted() {
         try {
-            new WaitManager(driver).waitUntilpresenceOfElementLocated(FILE_REMOVED_POP_UP_LOCATOR);
+            new WaitManager(driver).waitUntilPresenceOfElementLocated(FILE_REMOVED_POP_UP_LOCATOR);
             return true;
         } catch (TimeoutException e) {
             return false;

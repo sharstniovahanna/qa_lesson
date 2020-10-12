@@ -1,4 +1,6 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import junit.framework.TestListener;
+import listners.TestListner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,7 +13,7 @@ import ru.yandex.email_page.EmailPage;
 import ru.yandex.email_page.LoginPage;
 import ru.yandex.email_page.SearchPage;
 
-@Listeners(io.qameta.allure.testng.AllureTestNg.class)
+@Listeners({io.qameta.allure.testng.AllureTestNg.class, TestListner.class})
 public class LoginTest {
     private WebDriver driver;
 

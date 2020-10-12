@@ -5,8 +5,6 @@ import help_services.WaitManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends AbstractPage {
     private static final By SUBMIT_BUTTON_LOCATOR = By.xpath(".//*[@type='submit']");
@@ -19,17 +17,17 @@ public class LoginPage extends AbstractPage {
     }
 
     public WebElement getLoginField() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(LOGIN_FIELD_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(LOGIN_FIELD_LOCATOR);
         return driver.findElement(LOGIN_FIELD_LOCATOR);
     }
 
     public WebElement getSubmitButton() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(SUBMIT_BUTTON_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(SUBMIT_BUTTON_LOCATOR);
         return driver.findElement(SUBMIT_BUTTON_LOCATOR);
     }
 
     public WebElement getPasswordField() {
-        new WaitManager(driver).waitUntilpresenceOfElementLocated(PASSWORD_FIELD_LOCATOR);
+        new WaitManager(driver).waitUntilPresenceOfElementLocated(PASSWORD_FIELD_LOCATOR);
         return driver.findElement(PASSWORD_FIELD_LOCATOR);
     }
 
