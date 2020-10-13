@@ -7,10 +7,12 @@ This program describes LoginTest to personal email at yandex.by and DocumentSent
 1. Download JDK 
 
 
-## Usage
+## Run
 
 ```
 Open IDE with parametr -Dtestng.dtd.http=true
+Fill Login and password in src/test/resources.properties before starting test execution
+
 ```
 
 
