@@ -7,11 +7,8 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
-import java.util.Set;
 
 public class YandexDiskPage extends AbstractPage {
     public final By DOWNLOADS_FOLDER_BUTTON_LOCATOR = By.cssSelector("a.navigation__link_downloads");
@@ -40,7 +37,6 @@ public class YandexDiskPage extends AbstractPage {
     }
 
 
-
     public WebElement getDownloadsFolderButton() {
         new WaitManager(driver).waitUntilPresenceOfElementLocated(DOWNLOADS_FOLDER_BUTTON_LOCATOR);
         return driver.findElement(DOWNLOADS_FOLDER_BUTTON_LOCATOR);
@@ -60,7 +56,6 @@ public class YandexDiskPage extends AbstractPage {
         new WaitManager(driver).waitUntilPresenceOfElementLocated(CONFIRMATION_MOVE_BUTTON_LOCATOR);
         return driver.findElement(CONFIRMATION_MOVE_BUTTON_LOCATOR);
     }
-
 
 
     public void moveFileToGeneralFolder() {

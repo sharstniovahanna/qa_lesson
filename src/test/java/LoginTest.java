@@ -1,46 +1,25 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import listners.TestListner;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.email_page.EmailPage;
 import ru.yandex.email_page.LoginPage;
 import ru.yandex.email_page.SearchPage;
+import uttils.PropertiesManager;
 
 @Listeners({io.qameta.allure.testng.AllureTestNg.class, TestListner.class})
-public class LoginTest {
-    private WebDriver driver;
-
-    @BeforeMethod
-    public void preSetUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        driver.get("https://yandex.by/");
-    }
+public class LoginTest extends AbstractTest {
 
     @Test
     public void positiveLoginTest() {
         SearchPage searchPage = new SearchPage(driver);
-        searchPage.goToLoginPage();
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginWithCreds("sharstniovaH", "123456!");
-        EmailPage emailPage = new EmailPage(driver);
-
+        LoginPage loginPage = searchPage.goToLoginPage();
+        EmailPage emailPage = loginPage.loginWithCreds(
+                PropertiesManager.getProperty("correct_username"),
+                PropertiesManager.getProperty("correct_password")
+        );
         Assert.assertTrue(emailPage.isOpened());
-
     }
 
-    @AfterMethod
-    public void teardown() {
-        driver.close();
-        driver.quit();
-    }
 
 }
