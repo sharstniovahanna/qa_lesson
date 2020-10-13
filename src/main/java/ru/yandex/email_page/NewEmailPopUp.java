@@ -24,7 +24,6 @@ public class NewEmailPopUp extends AbstractPage {
     }
 
 
-
     public WebElement getRecipientTextField() {
         new WaitManager(driver).waitUntilPresenceOfElementLocated(RECIPIENT_TEXTFIELD_LOCATOR);
         return driver.findElement(RECIPIENT_TEXTFIELD_LOCATOR);
@@ -34,7 +33,6 @@ public class NewEmailPopUp extends AbstractPage {
         new WaitManager(driver).waitUntilPresenceOfElementLocated(ATTACHFILE_LOCATOR);
         return driver.findElement(ATTACHFILE_LOCATOR);
     }
-
 
 
     public void setRecipient(String... emailAddress) {

@@ -9,8 +9,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.yandex.yandex_disk.YandexDiskPage;
 
 import java.io.File;
+import java.util.Set;
 
 public class EmailPage extends AbstractPage {
     private static final By EMAIL_LINK_LOGO_LOCATOR = By.xpath("//a[@data-count='{\"name\":\"logo-service\"}']");
@@ -21,16 +25,12 @@ public class EmailPage extends AbstractPage {
     private static final String SAVE_TO_DISK_BUTTON_LOCATOR_TEMPLATE = "//*[name()='svg' and contains(@class,'Attach-Download_Disk')]/parent::a[contains(@title,'%s')]";
     private static final By WRITE_BUTTON_LOCATOR = By.cssSelector("span.mail-ComposeButton-Text");
     private static final Logger logger = LogManager.getLogger(EmailPage.class);
+    public final By OPEN_DISK_LINK_LOCATOR = By.xpath("//span[text()='Диск']");
 
 
     public EmailPage(WebDriver driver) {
         super.driver = driver;
     }
-
-
-
-
-
 
 
     public WebElement getBackToIncomeMsg() {
@@ -42,6 +42,7 @@ public class EmailPage extends AbstractPage {
         new WaitManager(driver).waitUntilPresenceOfElementLocated(REFRESH_BUTTON_LOCATOR);
         return driver.findElement(REFRESH_BUTTON_LOCATOR);
     }
+
     public WebElement getWriteButton() {
         new WaitManager(driver).waitUntilPresenceOfElementLocated(WRITE_BUTTON_LOCATOR);
         return driver.findElement(WRITE_BUTTON_LOCATOR);
@@ -62,6 +63,12 @@ public class EmailPage extends AbstractPage {
         By selectorOfAttachedFile = By.xpath(xpathOfAttachedFile);
         new WaitManager(driver).waitUntilPresenceOfElementLocated(selectorOfAttachedFile);
         return driver.findElement(selectorOfAttachedFile);
+
+    }
+
+    public WebElement getOpenDiskLink() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(OPEN_DISK_LINK_LOCATOR));
+        return driver.findElement(OPEN_DISK_LINK_LOCATOR);
     }
 
     public void refreshPage() {
@@ -75,6 +82,16 @@ public class EmailPage extends AbstractPage {
         driver.switchTo().frame(driver.findElement(SAVED_TO_DISK_IFRAME_LOCATOR));
         new WaitManager(driver).waitUntilPresenceOfElementLocated(GREEN_CIRCLE_PICTURE_LOCATOR);
         driver.switchTo().parentFrame();
+    }
+
+    public YandexDiskPage goToYandexDisk() {
+        Set<String> handle1 = driver.getWindowHandles();
+        getOpenDiskLink().click();
+        Set<String> handle2 = driver.getWindowHandles();
+        handle2.removeAll(handle1);
+        Object[] array = handle2.toArray();
+        driver.switchTo().window((String) array[0]);
+        return new YandexDiskPage(driver);
     }
 
     public boolean isOpened() {

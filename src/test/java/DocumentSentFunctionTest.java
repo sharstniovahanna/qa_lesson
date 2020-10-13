@@ -33,7 +33,7 @@ public class DocumentSentFunctionTest extends AbstractTest {
     public void positiveLoginTest() {
         SearchPage searchPage = new SearchPage(driver);
         LoginPage loginPage = searchPage.goToLoginPage();
-        EmailPage emailPage=loginPage.loginWithCreds(
+        EmailPage emailPage = loginPage.loginWithCreds(
                 PropertiesManager.getProperty("correct_username"),
                 PropertiesManager.getProperty("correct_password")
         );
@@ -48,8 +48,7 @@ public class DocumentSentFunctionTest extends AbstractTest {
         emailPage.returnToIncomeMsg();
         emailPage.refreshPage();
         emailPage.saveToDisk(attachedFile);
-        YandexDiskPage yandexDisk = new YandexDiskPage(driver);
-        yandexDisk.goToYandexDisk();
+        YandexDiskPage yandexDisk = emailPage.goToYandexDisk();
         yandexDisk.openDownloadsFolder();
         yandexDisk.clickDownloadedFile(attachedFile);
         yandexDisk.moveFileToGeneralFolder();

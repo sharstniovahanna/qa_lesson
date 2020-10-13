@@ -14,7 +14,6 @@ import java.io.File;
 import java.util.Set;
 
 public class YandexDiskPage extends AbstractPage {
-    public final By OPEN_DISK_LINK_LOCATOR = By.xpath("//span[text()='Диск']");
     public final By DOWNLOADS_FOLDER_BUTTON_LOCATOR = By.cssSelector("a.navigation__link_downloads");
     private final By MOVE_BUTTON_LOCATOR = By.cssSelector(".groupable-buttons__visible-button_name_move");
     private final By CONFIRMATION_MOVE_BUTTON_LOCATOR = By.cssSelector(".modal_visible_yes .confirmation-dialog__button_submit");
@@ -40,10 +39,7 @@ public class YandexDiskPage extends AbstractPage {
         getDownloadedFileButton(file).click();
     }
 
-    public WebElement getOpenDiskLink() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(OPEN_DISK_LINK_LOCATOR));
-        return driver.findElement(OPEN_DISK_LINK_LOCATOR);
-    }
+
 
     public WebElement getDownloadsFolderButton() {
         new WaitManager(driver).waitUntilPresenceOfElementLocated(DOWNLOADS_FOLDER_BUTTON_LOCATOR);
@@ -65,15 +61,7 @@ public class YandexDiskPage extends AbstractPage {
         return driver.findElement(CONFIRMATION_MOVE_BUTTON_LOCATOR);
     }
 
-    public void goToYandexDisk() {
 
-        Set<String> handle1 = driver.getWindowHandles();
-        getOpenDiskLink().click();
-        Set<String> handle2 = driver.getWindowHandles();
-        handle2.removeAll(handle1);
-        Object[] array = handle2.toArray();
-        driver.switchTo().window((String) array[0]);
-    }
 
     public void moveFileToGeneralFolder() {
         getMoveButton().click();
