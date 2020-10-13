@@ -30,7 +30,7 @@ public class YandexDiskPage extends AbstractPage {
 
     public WebElement getDownloadedFileButton(File file) {
 
-        String xpathOfDownloadedFile = String.format(DOWNLOADED_FILE_LOCATOR,file.getName());
+        String xpathOfDownloadedFile = String.format(DOWNLOADED_FILE_LOCATOR, file.getName());
         By DOWNLOADED_FILE_LOCATOR_BUTTON = By.xpath(xpathOfDownloadedFile);
         new WaitManager(driver).waitUntilPresenceOfElementLocated(DOWNLOADED_FILE_LOCATOR_BUTTON);
         return driver.findElement(DOWNLOADED_FILE_LOCATOR_BUTTON);

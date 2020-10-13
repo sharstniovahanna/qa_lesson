@@ -31,11 +31,12 @@ public class LoginPage extends AbstractPage {
         return driver.findElement(PASSWORD_FIELD_LOCATOR);
     }
 
-    public void loginWithCreds(String username, String password) {
+    public EmailPage loginWithCreds(String username, String password) {
         getLoginField().sendKeys(username);
         getSubmitButton().click();
         getPasswordField().sendKeys(password);
         getSubmitButton().click();
+        return new EmailPage(driver);
     }
 
 }

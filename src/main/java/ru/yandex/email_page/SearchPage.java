@@ -16,14 +16,14 @@ public class SearchPage extends AbstractPage {
         super.driver = driver;
     }
 
-    public void goToLoginPage() {
-
+    public LoginPage goToLoginPage() {
         Set<String> handle1 = driver.getWindowHandles();
         getEnterEmailButton().click();
         Set<String> handle2 = driver.getWindowHandles();
         handle2.removeAll(handle1);
         Object[] array = handle2.toArray();
         driver.switchTo().window((String) array[0]);
+        return new LoginPage(driver);
     }
 
     public WebElement getEnterEmailButton() {

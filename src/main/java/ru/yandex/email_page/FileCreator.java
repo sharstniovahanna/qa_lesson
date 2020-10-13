@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class FileCreator {
-    private static String ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
+    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
 
     public static File create() {
 
         try {
-            File file = new File(UUID.randomUUID().toString()+ ".txt");
+            File file = new File(UUID.randomUUID().toString() + ".txt");
             if (file.createNewFile()) {
                 FileWriter writer = new FileWriter(file);
                 StringBuilder stringBuilder = new StringBuilder();
