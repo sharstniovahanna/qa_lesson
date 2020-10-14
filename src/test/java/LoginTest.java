@@ -3,8 +3,8 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.email_page.EmailPage;
-import ru.yandex.email_page.LoginPage;
-import ru.yandex.email_page.SearchPage;
+import ru.yandex.login_page.LoginPage;
+import ru.yandex.search_page.SearchPage;
 import uttils.PropertiesManager;
 
 @Listeners({io.qameta.allure.testng.AllureTestNg.class, TestListner.class})

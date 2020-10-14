@@ -1,4 +1,4 @@
-package ru.yandex.email_page;
+package ru.yandex.search_page;
 
 import help_services.AbstractPage;
 import org.openqa.selenium.By;
@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.yandex.login_page.LoginPage;
 
 import java.util.Set;
 

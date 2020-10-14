@@ -36,7 +36,11 @@ public class NewEmailPopUp extends AbstractPage {
 
 
     public void setRecipient(String... emailAddress) {
-        getRecipientTextField().sendKeys(emailAddress);
+        StringBuilder recipient = new StringBuilder();
+        for (int i = 0; i < emailAddress.length; i++) {
+            recipient.append(emailAddress[i]).append(" ");
+        }
+        getRecipientTextField().sendKeys(recipient.toString());
     }
 
 

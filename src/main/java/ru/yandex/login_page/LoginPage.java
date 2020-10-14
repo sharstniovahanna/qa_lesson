@@ -1,10 +1,11 @@
-package ru.yandex.email_page;
+package ru.yandex.login_page;
 
 import help_services.AbstractPage;
 import help_services.WaitManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ru.yandex.email_page.EmailPage;
 
 public class LoginPage extends AbstractPage {
     private static final By SUBMIT_BUTTON_LOCATOR = By.xpath(".//*[@type='submit']");
