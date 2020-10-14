@@ -10,8 +10,8 @@ import ru.yandex.email_page.NewEmailPopUp;
 import ru.yandex.login_page.LoginPage;
 import ru.yandex.search_page.SearchPage;
 import ru.yandex.yandex_disk.YandexDiskPage;
-import ru.yandex.yandex_disk.left_menu.DownloadFolder;
-import ru.yandex.yandex_disk.left_menu.GeneralFolder;
+import ru.yandex.yandex_disk.left_menu.sections.DownloadFolder;
+import ru.yandex.yandex_disk.left_menu.sections.GeneralFolder;
 import uttils.PropertiesManager;
 
 import java.io.File;
@@ -55,10 +55,10 @@ public class DocumentSentFunctionTest extends AbstractTest {
         emailPage.refreshPage();
         emailPage.saveToDisk(attachedFile);
         YandexDiskPage yandexDisk = emailPage.goToYandexDisk();
-        DownloadFolder downloadFolder = yandexDisk.openDownloadsFolder();
+        DownloadFolder downloadFolder = yandexDisk.goToLeftMenu().openDownloadsFolder();
         downloadFolder.clickDownloadedFile(attachedFile);
         downloadFolder.moveFileToGeneralFolder();
-        GeneralFolder generalFolder = yandexDisk.goToFileSectionOnDisk();
+        GeneralFolder generalFolder = yandexDisk.goToLeftMenu().goToFileSectionOnDisk();
         generalFolder.dragAndDrop(attachedFile);
         generalFolder.isFileDeleted();
     }

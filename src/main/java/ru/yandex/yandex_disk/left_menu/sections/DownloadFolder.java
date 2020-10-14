@@ -1,4 +1,4 @@
-package ru.yandex.yandex_disk.left_menu;
+package ru.yandex.yandex_disk.left_menu.sections;
 
 import help_services.AbstractPage;
 import help_services.WaitManager;
